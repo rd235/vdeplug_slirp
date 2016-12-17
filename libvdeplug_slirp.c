@@ -144,6 +144,11 @@ static VDECONN *vde_slirp_open(char *sockname, char *descr,int interface_version
 	if (vde_parseparms(sockname, parms) != 0)
 		return NULL;
 
+	if (*sockname != 0) {
+		fprintf(stderr, "invalid option. hint: use /// to add options:\n\te.g. slirp:///v4. (slirp://v4 is wrong)\n");
+		return NULL;
+	}
+
 	if (v4str) flags |= SLIRP_IPV4;
 	if (v6str) flags |= SLIRP_IPV6;
 	slirp = slirp_open(flags);
