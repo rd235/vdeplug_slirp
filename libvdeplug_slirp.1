@@ -1,0 +1,74 @@
+.TH LIBVDEPLUG_VXVDE 1 "December 7, 2016" "Virtual Distributed Ethernet"
+.SH NAME
+libvdeplug_slirp - vdeplug module for vde_switch based networks
+.SH SYNOPSIS
+libvdeplug_slirp.so
+.SH DESCRIPTION
+This is the libvdeplug module to join TCP-IP networks using the slirp emulator.
+
+This module of libvdeplug4 can be used in any program supporting vde like
+\fBvde_plug\fR, \fBkvm\fR, \fBqemu\fR, \fBuser-mode-linux\fR and \fBvirtualbox\fR.
+
+The vde_plug_url syntax of this module is the following:
+.RS
+.br
+\fBslirp://\fR[\fB/\fIOPTION\fR][\fB/\fIOPTION\fR]
+.RE
+
+If \fImulticast_addr\fR is omitted libvdeplug_slirp uses the default addresses:
+\fB239.0.0.1\fR for IPv4 and \fBff05:56de::1\fR for IPv6.
+
+.SH OPTIONS
+.TP
+\fBv4\fR
+provide IPv4 service (default value if neither \fBv4\fR nor \fBv6\fR options are set).
+.TP
+\fBv6\fR
+provide IPv6 service.
+.TP
+\fBaddr=\fR\fIIPv4addr
+Set the IPv4 address of slirp (default value 10.0.2.2/24).
+.TP
+\fBaddr6=\fR\fIIPv6addr
+Set the IPv6 address of slirp (default value fe80::2/64).
+.TP
+\fBhostname=\fR\fIname
+define the hostname.
+.TP
+\fBtftp_path=\fR\fIpath
+define the path of the directory whose contents are available by the tftp service.
+.TP
+\fBbootfile=\fR\fIpath
+define the path of the bootfile (for bootp)
+.TP
+\fBdhcp=\fR\fIdhcpIPv4addr
+set the lowest IP address assigned by dhcp
+.TP
+\fBtcpfwd=\fR\fI[hostIP:]hostport:guestIP:guestport[,[hostIP:]hostport:guestIP:guestport]...
+define TCP port(s) forwarding. 
+.TP
+\fBudpfwd=\fR\fI[hostIP:]hostport:guestIP:guestport[,[hostIP:]hostport:guestIP:guestport]...
+define UDPport(s) forwarding. 
+.TP
+\fBunixfwd=\fR\fI[slirpIP:]slirpport:path[,[slirpIP:]slirpport:path]...
+define forwarding of one or more port (from the virtual network) to a PF_UNIX path (commoly used
+to forward ports to a X server)	
+.TP
+.SH EXAMPLES
+.B slirp:///v4/v6
+.br
+This vde_plug_url enables both IPv4 and IPv6
+.sp
+When a program uses the following vde_plug_url:
+.br
+.B slirp:///tcpfwd=8080:10.0.2.15:80/unixfwd=6000:\\\\"/tmp/.X11-unix/0\\\\"
+.br
+tcp connections to the host computer port 8080 (any interface) are forwarded to 10.0.2.15 port 80,
+and x clients in the virtual network using -display 10.0.2.2:0 use the X-server of the host.
+.SH NOTICE
+Virtual Distributed Ethernet is not related in any way with
+www.vde.com ("Verband der Elektrotechnik, Elektronik und Informationstechnik"
+i.e. the German "Association for Electrical, Electronic & Information
+Technologies").
+.SH SEE ALSO
+\fBvde_plug\fP(1),
