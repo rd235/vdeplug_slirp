@@ -1,0 +1,3 @@
+libvdeplug_slirp.c itself has been releases under LGPLv2.1
+the entire plugin is subject to GPLv2 (inherited from libslirp as a
+result of the code forked from qemu).
