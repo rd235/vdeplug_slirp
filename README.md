@@ -1,7 +1,14 @@
+# THIS VDE PLUGIN IS DEPRECATED
+
+please use [its new implementation](https://github.com/virtualsquare/vdeplug_slirp) instead.
+That new plugin is based on [libvdeslirp](https://github.com/virtualsquare/libvdeslirp) and on
+[`qemu`'s libslirp](https://gitlab.freedesktop.org/slirp/libslirp).
+The code of this plugin **will no longer be maintained**
+
 # vdeplug_slirp
 
 This is the libvdeplug plugin module to join slirp networks.
-It is based on the [libslirp](https://github.com/rd235/libslirp) library.
+It is based on the [(old) libslirp](https://github.com/rd235/libslirp) library **no longer maintained**.
 
 This module of libvdeplug4 can be used in any program supporting VDE like vde_plug, kvm, qemu, user-mode-linux and virtualbox.
 
